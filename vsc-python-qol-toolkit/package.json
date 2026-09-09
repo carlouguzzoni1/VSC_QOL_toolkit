@@ -1,0 +1,80 @@
+{
+  "name": "vsc-python-qol-toolkit",
+  "displayName": "VSC Python QOL Toolkit",
+  "description": "Quality-of-life commands for Python/shell editing: collapse/expand args & data structures, select/copy/cut functions, signatures, and bracket contents, a debug-print toggle, a timing wrapper, and jump-to-function navigation.",
+  "version": "0.3.0",
+  "publisher": "local-dev",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Formatters", "Other"],
+  "main": "./out/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      { "command": "bracketCollapse.toggle", "title": "VSC Toolkit: Toggle Expand/Collapse (args / data structure)" },
+      { "command": "vscToolkit.selectFunction", "title": "VSC Toolkit: Select Enclosing Function" },
+      { "command": "vscToolkit.copyFunction", "title": "VSC Toolkit: Copy Enclosing Function" },
+      { "command": "vscToolkit.cutFunction", "title": "VSC Toolkit: Cut Enclosing Function" },
+      { "command": "pyQol.selectSignature", "title": "VSC Toolkit: Select Function Signature" },
+      { "command": "pyQol.copySignature", "title": "VSC Toolkit: Copy Function Signature" },
+      { "command": "vscToolkit.selectInsideBrackets", "title": "VSC Toolkit: Select Inside Brackets" },
+      { "command": "vscToolkit.copyInsideBrackets", "title": "VSC Toolkit: Copy Inside Brackets" },
+      { "command": "vscToolkit.cutInsideBrackets", "title": "VSC Toolkit: Cut Inside Brackets" },
+      { "command": "pyQol.toggleDebugPrint", "title": "VSC Toolkit: Toggle Debug Print for Variable" },
+      { "command": "pyQol.toggleTimingWrapper", "title": "VSC Toolkit: Toggle Timing Wrapper for Call" },
+      { "command": "vscToolkit.jumpToNextFunction", "title": "VSC Toolkit: Jump to Next Function/Class" },
+      { "command": "vscToolkit.jumpToPreviousFunction", "title": "VSC Toolkit: Jump to Previous Function/Class" }
+    ],
+    "keybindings": [
+      { "command": "bracketCollapse.toggle", "key": "ctrl+alt+9", "mac": "cmd+alt+9", "when": "editorTextFocus" },
+      { "command": "vscToolkit.selectFunction", "key": "ctrl+alt+f", "mac": "cmd+alt+f", "when": "editorTextFocus" },
+      { "command": "vscToolkit.copyFunction", "key": "ctrl+alt+c", "mac": "cmd+alt+c", "when": "editorTextFocus" },
+      { "command": "vscToolkit.cutFunction", "key": "ctrl+alt+x", "mac": "cmd+alt+x", "when": "editorTextFocus" },
+      { "command": "pyQol.selectSignature", "key": "ctrl+alt+shift+f", "mac": "cmd+alt+shift+f", "when": "editorTextFocus" },
+      { "command": "pyQol.copySignature", "key": "ctrl+alt+shift+c", "mac": "cmd+alt+shift+c", "when": "editorTextFocus" },
+      { "command": "vscToolkit.selectInsideBrackets", "key": "ctrl+alt+b", "mac": "cmd+alt+b", "when": "editorTextFocus" },
+      { "command": "vscToolkit.copyInsideBrackets", "key": "ctrl+alt+shift+b", "mac": "cmd+alt+shift+b", "when": "editorTextFocus" },
+      { "command": "vscToolkit.cutInsideBrackets", "key": "ctrl+alt+shift+x", "mac": "cmd+alt+shift+x", "when": "editorTextFocus" },
+      { "command": "pyQol.toggleDebugPrint", "key": "ctrl+alt+d", "mac": "cmd+alt+d", "when": "editorTextFocus" },
+      { "command": "pyQol.toggleTimingWrapper", "key": "ctrl+alt+t", "mac": "cmd+alt+t", "when": "editorTextFocus" },
+      { "command": "vscToolkit.jumpToNextFunction", "key": "ctrl+alt+n", "mac": "cmd+alt+n", "when": "editorTextFocus" },
+      { "command": "vscToolkit.jumpToPreviousFunction", "key": "ctrl+alt+p", "mac": "cmd+alt+p", "when": "editorTextFocus" }
+    ],
+    "menus": {
+      "editor/context": [
+        { "command": "bracketCollapse.toggle", "group": "1_modification", "when": "editorTextFocus && (editorLangId == python || editorLangId == shellscript)" },
+        { "command": "vscToolkit.selectInsideBrackets", "group": "1_modification", "when": "editorTextFocus && !editorHasSelection && (editorLangId == python || editorLangId == shellscript)" },
+        { "command": "vscToolkit.copyInsideBrackets", "group": "1_modification", "when": "editorTextFocus && !editorHasSelection && (editorLangId == python || editorLangId == shellscript)" },
+        { "command": "vscToolkit.cutInsideBrackets", "group": "1_modification", "when": "editorTextFocus && !editorHasSelection && (editorLangId == python || editorLangId == shellscript)" },
+        { "command": "vscToolkit.selectFunction", "group": "9_cutcopypaste", "when": "editorTextFocus && !editorHasSelection && (editorLangId == python || editorLangId == shellscript)" },
+        { "command": "vscToolkit.copyFunction", "group": "9_cutcopypaste", "when": "editorTextFocus && !editorHasSelection && (editorLangId == python || editorLangId == shellscript)" },
+        { "command": "vscToolkit.cutFunction", "group": "9_cutcopypaste", "when": "editorTextFocus && !editorHasSelection && (editorLangId == python || editorLangId == shellscript)" },
+        { "command": "pyQol.selectSignature", "group": "9_cutcopypaste", "when": "editorTextFocus && !editorHasSelection && editorLangId == python" },
+        { "command": "pyQol.copySignature", "group": "9_cutcopypaste", "when": "editorTextFocus && !editorHasSelection && editorLangId == python" },
+        { "command": "pyQol.toggleDebugPrint", "group": "9_cutcopypaste", "when": "editorTextFocus && !editorHasSelection && editorLangId == python" },
+        { "command": "pyQol.toggleTimingWrapper", "group": "9_cutcopypaste", "when": "editorTextFocus && !editorHasSelection && editorLangId == python" }
+      ]
+    },
+    "configuration": {
+      "title": "VSC Python QOL Toolkit",
+      "properties": {
+        "bracketCollapse.trailingComma": {
+          "type": "boolean",
+          "default": true,
+          "description": "Add a trailing comma after the last item when expanding."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0"
+  }
+}

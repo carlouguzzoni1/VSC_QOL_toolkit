@@ -1,0 +1,70 @@
+{
+  "name": "vsc-jupyter-qol-toolkit",
+  "displayName": "Jupyter QOL Toolkit",
+  "description": "Per-cell 'notify me when this finishes running' toggle (with different sounds for success/warning/error), plus a table-of-contents pop-up for jumping between markdown sections in long notebooks.",
+  "version": "0.2.0",
+  "publisher": "local-dev",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Notebooks", "Other"],
+  "main": "./out/extension.js",
+  "activationEvents": ["onNotebook:jupyter-notebook"],
+  "contributes": {
+    "commands": [
+      {
+        "command": "jupyterQol.toggleCellNotify",
+        "title": "Jupyter QOL: Toggle Notify-on-Completion for This Cell",
+        "icon": "$(bell)"
+      },
+      {
+        "command": "jupyterQol.showToc",
+        "title": "Jupyter QOL: Show Table of Contents"
+      }
+    ],
+    "menus": {
+      "notebook/cell/title": [
+        {
+          "command": "jupyterQol.toggleCellNotify",
+          "when": "notebookCellType == code",
+          "group": "inline"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "jupyterQol.showToc",
+        "key": "ctrl+alt+t",
+        "mac": "cmd+alt+t",
+        "when": "notebookEditorFocused"
+      }
+    ],
+    "configuration": {
+      "title": "Jupyter QOL Toolkit",
+      "properties": {
+        "jupyterQol.playSound": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play a sound when a notify-enabled cell finishes running (different sound for success / warning / error)."
+        },
+        "jupyterQol.systemNotification": {
+          "type": "boolean",
+          "default": true,
+          "description": "Also show an OS-level notification (so you see it even if VS Code isn't in the foreground)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "install-local": "npx @vscode/vsce package && code --install-extension *.vsix --force"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0"
+  }
+}
